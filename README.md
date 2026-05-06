@@ -1,68 +1,40 @@
 # forge-gfx-palette-mark
 
-`forge-gfx-palette-mark` is a Dart project for Graphics. It turns design a Dart verification harness for palette systems, covering incremental indexing, append-only fixtures, and failure-oriented tests into a small local model with readable fixtures and a direct verification command.
+`forge-gfx-palette-mark` is a compact Dart repository for graphics, centered on this goal: Design a Dart verification harness for palette systems, covering incremental indexing, append-only fixtures, and failure-oriented tests.
 
-## Reading Forge Gfx Palette Mark
+## Why This Exists
 
-Start with the README, then open `metadata/project.json` to check the constants behind the examples. After that, `fixtures/cases.csv` shows the compact path and `examples/extended_cases.csv` gives a wider look at the same rule.
+The point is to make a small domain rule concrete enough that a reader can change it and immediately see what broke.
 
-## What It Does
+## Forge Gfx Palette Mark Review Notes
 
-- Includes extended examples for render inputs, including `surge` and `degraded`.
-- Documents stable output tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
-- Adds a repository audit script that checks structure before running the language verifier.
+`baseline` and `stale` are the cases worth reading first. They show the optimistic and cautious ends of the fixture.
 
-## Purpose
+## Capabilities
 
-This project keeps the domain idea close to the tests. That makes it useful as a reference implementation, a small experiment, or a starting point for a more specialized tool.
+- `fixtures/domain_review.csv` adds cases for geometry span and atlas pressure.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/forge-gfx-palette-walkthrough.md` walks through the case spread.
+- The Dart code includes a review path for `geometry span` and `geometry span`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Files Worth Reading
+## Implementation Shape
 
-- `lib`: library code
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
+The implementation keeps the scoring rule plain: reward signal and confidence, preserve slack, penalize drag, then classify the result into a review lane.
 
-## Design Sketch
+The Dart code keeps the review rule close to the tests.
 
-The project is organized around a compact model rather than a large framework. Inputs are scored, classified, and checked against golden fixtures. The constants live in code and are mirrored in metadata so documentation drift is easy to catch. The Dart project uses a small library and assertion script, avoiding package dependencies for verification.
-
-## Usage
+## Local Usage
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
-
-## Fixture Notes
-
-The extended cases are not random smoke tests. `degraded` keeps pressure on the review path, while `surge` shows the model when capacity and weight are strong enough to clear the threshold.
-
 ## Verification
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
+That command is also the regression path. It verifies the domain cases and catches mismatches between the CSV, metadata, and code.
 
-The audit command checks repository structure and README constraints before it delegates to the verifier.
+## Roadmap
 
-## Limits
-
-The fixture set is deliberately small. That keeps the review surface clear, but it also means the model should not be treated as a complete domain simulator.
-
-## Next Directions
-
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Split the scoring constants into a typed configuration object and validate it before use.
-- Add one more graphics fixture that focuses on a malformed or borderline input.
-
-## Setup
-
-The only required setup is the local Dart toolchain. After cloning, stay in the repo root so fixture paths resolve correctly.
+The repository is intentionally scoped to local checks. I would expand it by adding adversarial fixtures before adding features.

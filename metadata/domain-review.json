@@ -1,0 +1,73 @@
+{
+  "repo": "forge-gfx-palette-mark",
+  "language": "Dart",
+  "category": "Graphics",
+  "goal": "Design a Dart verification harness for palette systems, covering incremental indexing, append-only fixtures, and failure-oriented tests.",
+  "review_model": {
+    "terms": [
+      "geometry span",
+      "atlas pressure",
+      "shader drift",
+      "render budget"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "geometry span",
+      "signal": 75,
+      "slack": 33,
+      "drag": 9,
+      "confidence": 91,
+      "score": 247,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "atlas pressure",
+      "signal": 62,
+      "slack": 23,
+      "drag": 25,
+      "confidence": 56,
+      "score": 128,
+      "lane": "watch"
+    },
+    {
+      "name": "edge",
+      "focus": "shader drift",
+      "signal": 48,
+      "slack": 28,
+      "drag": 10,
+      "confidence": 72,
+      "score": 166,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "render budget",
+      "signal": 80,
+      "slack": 40,
+      "drag": 18,
+      "confidence": 76,
+      "score": 222,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "geometry span",
+      "signal": 55,
+      "slack": 21,
+      "drag": 28,
+      "confidence": 65,
+      "score": 112,
+      "lane": "watch"
+    }
+  ]
+}
